@@ -1,4 +1,4 @@
-# csf.user
+# Computer Service Frontend
 
 ## Project setup
 ```
