@@ -105,5 +105,3 @@ dist
 
 #Intellij IDEA
 .idea/
-
-package-lock.json
