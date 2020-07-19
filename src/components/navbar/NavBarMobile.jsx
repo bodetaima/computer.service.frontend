@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Icon, Image, Menu, Sidebar, Input } from "semantic-ui-react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,9 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
             {_.map(leftItems, item => (
                 <Menu.Item onClick={onToggle} {...item} as={Link} />
             ))}
+            <Menu.Item>
+                <Input size="mini" placeholder="Search..." />
+            </Menu.Item>
         </Sidebar>
         <Sidebar.Pusher dimmed={visible} onClick={onPusherClick} style={{ minHeight: "100vh" }}>
             <Menu fixed="top" inverted>

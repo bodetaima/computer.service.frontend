@@ -3,3 +3,12 @@
 .text-red {
     color: $candy-pink;
 }
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-row {
+    flex-direction: row;
+}
