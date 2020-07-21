@@ -1,13 +1,10 @@
-import { Card, Icon } from "semantic-ui-react";
-
 const PartContainer = props => {
     return (
-        <Card
-            header={props.name}
-            meta={props.type}
-            description={props.description}
-            extra={props.price.toLocaleString("vn-VN", { style: "currency", currency: "VND" })}
-        />
+        <div className="part-container">
+            <span>{props.type}</span>
+            <div className="container-header"><h4>{props.name}</h4></div>
+            <div className="container-footer"><h2>{props.price.toLocaleString("vn-VN", { style: "currency", currency: "VND" })}</h2></div>
+        </div>
     );
 };
 

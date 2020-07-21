@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Grid } from "semantic-ui-react";
 import SideBar from "../components/sidebar/SideBar";
 import PartContainer from "../components/parts/PartContainer";
 
@@ -34,7 +33,7 @@ class Home extends Component {
     }
 
     async fetchParts() {
-        await fetch("http://localhost:1025/api/parts/frontend", {
+        await fetch("http://localhost:1025/api/parts/frontend?size=8", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -50,23 +49,25 @@ class Home extends Component {
 
     render() {
         const parts = this.state.parts.map(part => (
-            <div className="flex">
-                <PartContainer
-                    className="flex-row"
-                    key={part.id}
-                    name={part.name}
-                    type={part.type.name}
-                    price={part.price}
-                    description={part.description}
-                />
-            </div>
+            <PartContainer
+                key={part.id}
+                name={part.name}
+                type={part.type.name}
+                price={part.price}
+                description={part.description}
+            />
         ));
 
         return (
-            <div className="flex">
-                <SideBar className="flex-row" types={this.state.types} />
-                <div className="flex-row">{parts}</div>
-            </div>
+            <>
+                <div className="container">
+                    <SideBar style={{ width: "10%" }} types={this.state.types} />
+                    <div style={{ width: "89%", marginLeft: "1%" }}>
+                        <h3 style={{ marginLeft: "1%" }}>SẢN PHẨM MỚI</h3>
+                        <div className="flex">{parts}</div>
+                    </div>
+                </div>
+            </>
         );
     }
 }

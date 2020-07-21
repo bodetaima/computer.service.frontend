@@ -6,9 +6,28 @@
 
 .flex {
     display: flex;
-    justify-content: space-between;
+    flex-flow: row wrap;
 }
 
-.flex-row {
-    flex-direction: row;
+.container {
+    display: flex;
+}
+
+.part-container {
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    flex: 1 0 21%;
+    border: 1px solid #DCDCDC;
+    border-radius: 5px;
+}
+
+.container-header {
+    height: 50px;
+}
+
+.container-footer {
+    position: relative;
+    bottom: 0;
 }
