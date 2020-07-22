@@ -1,6 +1,16 @@
 import { parts } from "../actions/types";
 
-function partReducers(state = {}, action) {
+const partInitialState = {
+    pending: false,
+    partTypes: [],
+    parts: [],
+    size: 0,
+    page: 0,
+    totalPages: 0,
+    error: null,
+};
+
+function partReducers(state = partInitialState, action) {
     const { payload, type } = action;
     switch (type) {
         case parts.GET_PART_TYPES:

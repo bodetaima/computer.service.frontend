@@ -3,6 +3,7 @@ import SideBar from "../components/sidebar/SideBar";
 import PartContainer from "../components/parts/PartContainer";
 import { getPartTypes, getParts } from "../store/actions";
 import { connect } from "react-redux";
+import { Loader } from "semantic-ui-react";
 
 class Home extends Component {
     constructor(props) {
@@ -15,7 +16,10 @@ class Home extends Component {
     }
 
     render() {
-        const parts = this.props.parts.map((part) => (
+        if (this.props.pending === true) {
+            return <Loader active />;
+        }
+        const parts = this.props.parts.map(part => (
             <PartContainer
                 key={part.id}
                 name={part.name}
@@ -28,7 +32,7 @@ class Home extends Component {
         return (
             <>
                 <div className="container">
-                    <SideBar style={{ width: "10%" }} types={this.props.types} />
+                    <SideBar style={{ width: "10%" }} types={this.props.partTypes} />
                     <div style={{ width: "89%", marginLeft: "1%" }}>
                         <h3 style={{ marginLeft: "1%" }}>SẢN PHẨM MỚI</h3>
                         <div className="flex">{parts}</div>
@@ -39,7 +43,7 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     console.log(state);
     return {
         pending: state.pending,
@@ -51,7 +55,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     getPartTypes: () => dispatch(getPartTypes()),
     getParts: (size, page, sort) => dispatch(getParts(size, page, sort)),
 });
