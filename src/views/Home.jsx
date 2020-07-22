@@ -1,54 +1,21 @@
 import { Component } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import PartContainer from "../components/parts/PartContainer";
+import { getPartTypes, getParts } from "../store/actions";
+import { connect } from "react-redux";
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            types: [],
-            parts: [],
-        };
     }
 
     componentDidMount() {
-        document.title = "WeFixIt";
-        this.fetchTypes();
-        this.fetchParts();
-    }
-
-    async fetchTypes() {
-        await fetch("http://localhost:1025/api/types/frontend", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then(response => response.json())
-            .then(res => {
-                const types = res;
-                this.setState({ types: types });
-            })
-            .catch(error => console.log(error));
-    }
-
-    async fetchParts() {
-        await fetch("http://localhost:1025/api/parts/frontend?size=8", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then(response => response.json())
-            .then(res => {
-                const parts = res.parts;
-                this.setState({ parts: parts });
-            })
-            .catch(error => console.log(error));
+        this.props.getPartTypes();
+        this.props.getParts(8, 0, "");
     }
 
     render() {
-        const parts = this.state.parts.map(part => (
+        const parts = this.props.parts.map((part) => (
             <PartContainer
                 key={part.id}
                 name={part.name}
@@ -61,7 +28,7 @@ class Home extends Component {
         return (
             <>
                 <div className="container">
-                    <SideBar style={{ width: "10%" }} types={this.state.types} />
+                    <SideBar style={{ width: "10%" }} types={this.props.types} />
                     <div style={{ width: "89%", marginLeft: "1%" }}>
                         <h3 style={{ marginLeft: "1%" }}>SẢN PHẨM MỚI</h3>
                         <div className="flex">{parts}</div>
@@ -72,4 +39,21 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        pending: state.pending,
+        partTypes: state.partTypes,
+        parts: state.parts,
+        size: state.size,
+        page: state.page,
+        totalPages: state.totalPages,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    getPartTypes: () => dispatch(getPartTypes()),
+    getParts: (size, page, sort) => dispatch(getParts(size, page, sort)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

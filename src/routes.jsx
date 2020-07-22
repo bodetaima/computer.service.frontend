@@ -1,33 +1,13 @@
-import { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
-import { Segment, Loader, Image } from "semantic-ui-react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Parts from "./views/Parts";
-
-const fallbackLoader = (
-    <Segment>
-        <Loader active />
-        <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-    </Segment>
-);
-
-const Home = lazy(() => import("@/views/Home.jsx"));
+import Home from "./views/Home";
 
 function Routes() {
     return (
-        <>
-            <Switch>
-                <Route exact path="/">
-                    <Suspense fallback={fallbackLoader}>
-                        <Home />
-                    </Suspense>
-                </Route>
-                <Route path="/parts">
-                    <Suspense fallback={fallbackLoader}>
-                        <Parts />
-                    </Suspense>
-                </Route>
-            </Switch>
-        </>
+        <Router>
+            <Route exact path="/" component={Home} />
+            <Route path="/parts" component={Parts} />
+        </Router>
     );
 }
 
