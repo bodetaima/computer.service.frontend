@@ -6,16 +6,16 @@ import { Link } from "react-router-dom";
 const NavBarDesktop = ({ leftItems, rightItems }) => (
     <Menu fixed="top" inverted>
         <Menu.Item>
-            <Image size="mini" src={logo} />
+            <Image size="mini" src={logo} as={Link} to="/" />
         </Menu.Item>
-        {_.map(leftItems, item => (
+        {_.map(leftItems, (item) => (
             <Menu.Item {...item} as={Link} />
         ))}
         <Menu.Menu position="right">
             <Menu.Item>
                 <Input icon="search" placeholder="Search..." />
             </Menu.Item>
-            {_.map(rightItems, item => (
+            {_.map(rightItems, (item) => (
                 <Menu.Item {...item} />
             ))}
         </Menu.Menu>

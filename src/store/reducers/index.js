@@ -1,7 +1,7 @@
 import { parts } from "../actions/types";
 
 const partInitialState = {
-    pending: false,
+    pending: true,
     partTypes: [],
     parts: [],
     size: 0,

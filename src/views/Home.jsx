@@ -11,15 +11,16 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        document.title = "WeFixIt";
         this.props.getPartTypes();
-        this.props.getParts(8, 0, "");
+        this.props.getParts("", 8, 0, "");
     }
 
     render() {
         if (this.props.pending === true) {
             return <Loader active />;
         }
-        const parts = this.props.parts.map(part => (
+        const parts = this.props.parts.map((part) => (
             <PartContainer
                 key={part.id}
                 name={part.name}
@@ -43,8 +44,7 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    console.log(state);
+const mapStateToProps = (state) => {
     return {
         pending: state.pending,
         partTypes: state.partTypes,
@@ -55,9 +55,9 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     getPartTypes: () => dispatch(getPartTypes()),
-    getParts: (size, page, sort) => dispatch(getParts(size, page, sort)),
+    getParts: (type, size, page, sort) => dispatch(getParts(type, size, page, sort)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

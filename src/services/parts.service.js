@@ -2,7 +2,6 @@ import req from "../utils/request";
 
 class PartService {
     async getPartTypes() {
-        console.log("hihi");
         const options = {
             method: "GET",
             headers: {
@@ -12,14 +11,14 @@ class PartService {
         return req.get("/types/frontend", options);
     }
 
-    async getParts(size, page, sort) {
+    async getParts(type, size, page, sort) {
         const options = {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
         };
-        return req.get(`/parts/frontend?size=${size}&page=${page}&sort=${sort}`, options);
+        return req.get(`/parts/frontend?types=${type}&size=${size}&page=${page}&sort=${sort}`, options);
     }
 }
 
