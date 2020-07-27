@@ -5,8 +5,8 @@ import Home from "./views/Home";
 function Routes() {
     return (
         <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/parts" component={Parts} />
+            <Route exact path="/" component={Home} />
+            <Route path="/:type" component={Parts} />
         </Switch>
     );
 }

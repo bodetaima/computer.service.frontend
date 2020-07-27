@@ -9,7 +9,6 @@ function actionCreators(type, payload) {
 }
 
 export function getPartTypes() {
-    console.log("hello");
     return (dispatch) => {
         dispatch(actionCreators(parts.GET_PART_TYPES));
         return PartService.getPartTypes().then(
@@ -23,10 +22,10 @@ export function getPartTypes() {
     };
 }
 
-export function getParts(size, page, sort) {
+export function getParts(type, size, page, sort) {
     return (dispatch) => {
         dispatch(actionCreators(parts.GET_PARTS));
-        return PartService.getParts(size, page, sort).then(
+        return PartService.getParts(type, size, page, sort).then(
             (result) => {
                 dispatch(actionCreators(parts.GET_PARTS_SUCCESS, result));
             },
